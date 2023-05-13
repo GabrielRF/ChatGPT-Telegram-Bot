@@ -12,7 +12,10 @@ def ask_chatgpt(message):
     messages.append({"role": "user", "content": message})
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages = messages
+        messages = messages,
+        n = 1,
+        temperature = 1,
+        max_tokens=1024
     )
     messages.append({"role": "assistant", "content": response.choices[0].message.content})
     return response.choices[0].message.content
