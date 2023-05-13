@@ -1,0 +1,28 @@
+service: BotAssistente
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-west-3
+
+functions:
+  bot:
+    handler: bot.hello_http
+    events:
+      - httpApi:
+         path: /
+         method: post
+    environment:
+      TOKEN: ${env:TOKEN}
+      CHATGPTKEY: ${env:CHATGPTKEY}
+      USERID: ${env:USERID}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: false
+    usePipenv: false
+
