@@ -22,11 +22,11 @@ def ask_chatgpt(message):
 
 @bot.message_handler(commands=["start"])
 def clean_context(message):
-    if str(message.from_user.id) in answer_to:
+    if str(message.chat.id) in answer_to:
         messages = []
         bot.reply_to(message, f'Olá! Tudo bem?')
 
-@bot.message_handler(func=lambda message: str(message.from_user.id) in answer_to)
+@bot.message_handler(func=lambda message: str(message.chat.id) in answer_to)
 def message_received(message):
     bot.send_chat_action(message.chat.id, 'typing')
     try:
